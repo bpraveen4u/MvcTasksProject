@@ -1,0 +1,47 @@
+@model MvcApp.Models.Task
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.TaskName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.TaskName)
+    @Html.ValidationMessageFor(model => model.TaskName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+<div class="editor-label">
+    @Html.HiddenFor(model => model.CreatedOn)
+</div>
+<div class="editor-field">
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.ValidationMessageFor(model => model.CreatedOn)
+</div>
+
+<div class="editor-label">
+    @Html.HiddenFor(model => model.ModifiedOn)
+</div>
+<div class="editor-field">
+    @Html.HiddenFor(model => model.ModifiedOn)
+    @Html.ValidationMessageFor(model => model.ModifiedOn)
+</div>
+
+<div class="editor-label">
+    Status
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.StatusId, ((IEnumerable<MvcApp.Models.Status>)ViewBag.PossibleStatus).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.StatusId.ToString(),
+        Selected = (Model != null) && (option.StatusId == Model.StatusId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.StatusId)
+</div>

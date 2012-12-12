@@ -1,0 +1,65 @@
+@model IEnumerable<MvcApp.Models.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            TaskName
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Notes
+        </th>
+        <th>
+            CreatedOn
+        </th>
+        <th>
+            ModifiedOn
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TaskId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
+        </td>
+        <td>
+			@item.TaskName
+        </td>
+        <td>
+			@item.Description
+        </td>
+        <td>
+			@(item.Status == null ? "None" : item.Status.Name)
+        </td>
+        <td>
+			@(item.Notes == null ? "None" : item.Notes.Count.ToString())
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedOn)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.ModifiedOn)
+        </td>
+    </tr>
+}
+
+</table>
+
+
